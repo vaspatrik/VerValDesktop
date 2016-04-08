@@ -20,13 +20,15 @@ import ro.ubbcluj.analyzer.utils.FileExtMgr;
 //@RunWith(Parameterized.class)
 public class LogAnalyzerTest {
 	
-	private LogAnalyzer logAnalyzer;
+//	private LogAnalyzer logAnalyzer;
+	private LogAnalyzer logAnalyzerTestable;
 	private FileExtMgrFake fakeExtMgr;
 	
 	@Before
 	public void setUp() {
 		fakeExtMgr = new FileExtMgrFake();
-		logAnalyzer = new LogAnalyzer();
+//		logAnalyzer = new LogAnalyzer();
+		logAnalyzerTestable = new TestableLogAnalyzer(fakeExtMgr);
 		FileExtMgrFactory.getInstance().setFileExtMgr(fakeExtMgr);
 	}
 	
@@ -62,15 +64,27 @@ public class LogAnalyzerTest {
 //		String shortName = "so";
 //		logAnalyzer.IsValidLogFileName(shortName); 
 //	}
+//	@Test
+//	public void IsValidLogFileName_NotValid_ReturnFalse() {
+//		fakeExtMgr.setValid(false);
+//		assertEquals("should be invalid", logAnalyzer.IsValidLogFileName(""), false);
+//	}
+//	
+//	@Test
+//	public void IsValidLogFileName_Valid_ReturnTrue() {
+//		fakeExtMgr.setValid(true);
+//		assertEquals("should be valid", logAnalyzer.IsValidLogFileName(""), true);
+//	}
+//	
 	@Test
-	public void IsValidLogFileName_NotValid_ReturnFalse() {
+	public void IsValidLogFileNameTestable_NotValid_ReturnFalse() {
 		fakeExtMgr.setValid(false);
-		assertEquals("should be invalid", logAnalyzer.IsValidLogFileName(""), false);
+		assertEquals("should be invalid", logAnalyzerTestable.IsValidLogFileName(""), false);
 	}
 	
 	@Test
-	public void IsValidLogFileName_Valid_ReturnTrue() {
+	public void IsValidLogFileNameTestable_Valid_ReturnTrue() {
 		fakeExtMgr.setValid(true);
-		assertEquals("should be valid", logAnalyzer.IsValidLogFileName(""), true);
+		assertEquals("should be valid", logAnalyzerTestable.IsValidLogFileName(""), true);
 	}
 }

@@ -2,6 +2,7 @@ package ro.ubbcluj.analyzer;
 
 import ro.ubbcluj.analyzer.factory.FileExtMgrFactory;
 import ro.ubbcluj.analyzer.utils.FileExtMgr;
+import ro.ubbcluj.analyzer.utils.FileExtMgrImpl;
 
 public class LogAnalyzer {
 	
@@ -27,6 +28,11 @@ public class LogAnalyzer {
 //		return name.endsWith(SUFFIX);
 //		if (fileExtMgr != null)
 //		return fileExtMgr.isValid(name);
-		return FileExtMgrFactory.getInstance().getFileExtMgr().isValid(name);
+//		return FileExtMgrFactory.getInstance().getFileExtMgr().isValid(name);
+		return getFileExtMgr().isValid(name);
+	}
+
+	public FileExtMgr getFileExtMgr() {	
+		return new FileExtMgrImpl();
 	}
 }
