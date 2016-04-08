@@ -14,6 +14,7 @@ import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Parameterized;
 
 import ro.ubbcluj.analyzer.LogAnalyzer;
+import ro.ubbcluj.analyzer.factory.FileExtMgrFactory;
 import ro.ubbcluj.analyzer.utils.FileExtMgr;
 
 //@RunWith(Parameterized.class)
@@ -26,6 +27,7 @@ public class LogAnalyzerTest {
 	public void setUp() {
 		fakeExtMgr = new FileExtMgrFake();
 		logAnalyzer = new LogAnalyzer();
+		FileExtMgrFactory.getInstance().setFileExtMgr(fakeExtMgr);
 	}
 	
 	@After
@@ -63,14 +65,12 @@ public class LogAnalyzerTest {
 	@Test
 	public void IsValidLogFileName_NotValid_ReturnFalse() {
 		fakeExtMgr.setValid(false);
-		logAnalyzer.setFileExtMgr(fakeExtMgr);
 		assertEquals("should be invalid", logAnalyzer.IsValidLogFileName(""), false);
 	}
 	
 	@Test
 	public void IsValidLogFileName_Valid_ReturnTrue() {
 		fakeExtMgr.setValid(true);
-		logAnalyzer.setFileExtMgr(fakeExtMgr);
 		assertEquals("should be valid", logAnalyzer.IsValidLogFileName(""), true);
 	}
 }
